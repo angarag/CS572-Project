@@ -15,7 +15,7 @@ export class AddStaffComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-      this.signupForm = formBuilder.group({
+      this.signupForm = this.formBuilder.group({
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         email: ['', [Validators.required]],
@@ -24,6 +24,29 @@ export class AddStaffComponent implements OnInit {
         accept: [0]
       });
     }
+
+    onSubmit() {
+      console.log(this.signupForm);
+      const formValues = this.signupForm.value;
+
+      const user = {
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        email: formValues.email,
+        password: formValues.password
+      };
+
+      this.authService
+        .signup(user)
+        .subscribe(
+          response => {
+            return this.router.navigate(['/login']);
+          },
+          error => console.log(error)
+        );
+    }
+
+
   ngOnInit() {}
 }
 

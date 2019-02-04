@@ -12,6 +12,7 @@ import { LoaderComponent } from './static/loader/loader.component';
 import { AddStaffComponent } from './admin/add-staff/add-staff.component';
 import { DisplayStaffComponent } from './admin/display-staff/display-staff.component';
 import { StaffModule } from './staff/staff.module';
+import { HomeComponent } from './admin/home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { StaffModule } from './staff/staff.module';
     FooterComponent,
     LoaderComponent,
     AddStaffComponent,
-    DisplayStaffComponent
+    DisplayStaffComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
