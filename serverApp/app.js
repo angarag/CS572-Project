@@ -1,57 +1,61 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var lessMiddleware = require('less-middleware');
-var logger = require('morgan');
-const mongoose = require('mongoose');
+const express = require('express');
+const logger = require('morgan');
+const helmet = require('helmet');
 const cors = require('cors');
+const path = require('path');
+const db = require('./db.js')
 
-var indexRouter = require('./routes/index');
+const app = express();
+const port = process.env.port || 3600;
+
 var usersRouter = require('./routes/users');
-
-var app = express();
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-mongoose.connect("mongodb://ranjan:test123@ds151994.mlab.com:51994/mwadb", { useNewUrlParser: true })
-  .then (()=> {
-    console.log('connected to database')
-  })
-  .catch (()=> {
-    console.log('connection to db failed')
-  });
+const validateToken = (req, res, next) => {
+  return (req, res, next) => {
+    //if token exists, proceed, otherwise terminate
+    if (db.checkJWT()) {
+      console.log('token exists');
+      next();
+    }
+    else
+      res.json({ message: 'invalid token' })
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+  }
+}
 
+app.use(cors())
+app.use(helmet())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+//Middleware
+app.use('/api', validateToken())
 
-app.use('/', indexRouter);
+//Routes
+app.use("/admin", require('./routes/admin'));
 app.use('/api/users', usersRouter);
+//TO DO
+// app.use("/staff", require('./routes/staff'));
+// app.use("/student", require('./routes/student'));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error');
+  res.json({
+    message: err.message,
+    error: err
+  });
 });
-app.listen(3600);
+app.listen(port,()=>{
+  console.log(`Backend server is running on the port ${port}`)
+});
 
 module.exports = app;
