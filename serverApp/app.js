@@ -37,6 +37,7 @@ app.use('/api', validateToken())
 //Routes
 app.use("/admin", require('./routes/admin'));
 app.use('/api/users', usersRouter);
+app.use('/api/students', require('./routes/student'));
 //TO DO
 // app.use("/staff", require('./routes/staff'));
 // app.use("/student", require('./routes/student'));
