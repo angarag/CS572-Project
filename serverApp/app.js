@@ -14,20 +14,20 @@ var app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-var validateToken = (req, res,next) => {
+var validateToken = (req, res, next) => {
   return (req, res, next) => {
-      //if token exists, proceed, otherwise terminate
-      if(false)
-      res.json({message:'invalid token'})
-      if(db.checkJWT())
-      console.log('token exists')
-      else 
-      res.json({message:'invalid token'})
-      next();      
+    //if token exists, proceed, otherwise terminate
+    if (db.checkJWT()) {
+      console.log('token exists');
+      next();
+    }
+    else
+      res.json({ message: 'invalid token' })
+
   }
 }
 
-app.use('/api',validateToken())
+app.use('/api', validateToken())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,16 +44,16 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({
-      message: err.message,
-      error: err
+    message: err.message,
+    error: err
   });
 });
 app.listen(port);
