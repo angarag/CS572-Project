@@ -1,0 +1,34 @@
+<div class="container">
+    <a routerLink = "/addstaff">
+      <button class = 'btn btn-primary pull-right'>
+        Create Admission Staff
+      </button>
+    </a>
+    <br>
+    <br>
+<hr>
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Activate or Deactivate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let staff of staffs">
+          <td>{{staff.firstName}}</td>
+          <td>{{staff.lastName}}</td>
+          <td>{{staff.email}}</td>
+          <td>
+            <button class = 'btn btn-info' (click)= "onDeActivate(staff)" *ngIf = "isActivate">DeActivate </button>
+            <button class = 'btn btn-info' (click)= "onDeActivate(staff)" *ngIf = "!isActivate">Activate </button> 
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
+
