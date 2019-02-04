@@ -68,12 +68,12 @@ router.get("/users", function(req, res, next) {
     });
 });
 
-router.get("/users/:userid", function(req, res, next) {
-  const paramid = req.params.userid;
-  console.log(paramid);
+router.post("/users", function(req, res, next) {
+  isActive = !req.body.isActive;
+  console.log(isActive);
   User.findOneAndUpdate(
-    {_id: parseInt(paramid)},
-    {$set: {'firstName': 'anurodh'}},
+    {_id: req.body._id},
+    {$set: {'isActive': isActive}},
     (err, result) => {
       console.log(result.firstName);
       return res.status(200).json({

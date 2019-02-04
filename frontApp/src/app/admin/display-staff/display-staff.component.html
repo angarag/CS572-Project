@@ -13,7 +13,8 @@
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Activate or Deactivate</th>
+          <th scope="col">Status</th>
+          <th scope="col">Change Status</th>
         </tr>
       </thead>
       <tbody>
@@ -21,9 +22,10 @@
           <td>{{staff.firstName}}</td>
           <td>{{staff.lastName}}</td>
           <td>{{staff.email}}</td>
+          <td>{{staff.isActive?'Active':'DeActive'}}</td>
           <td>
-            <button class = 'btn btn-info' (click)= "onDeActivate(staff)" *ngIf = "isActivate">DeActivate </button>
-            <button class = 'btn btn-info' (click)= "onDeActivate(staff)" *ngIf = "!isActivate">Activate </button> 
+            <button class = 'btn btn-info' 
+            (click)= "onButtonClicked(staff)"> {{staff.isActive?'Deactivate':'Activate'}}</button>
 
           </td>
         </tr>
