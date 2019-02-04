@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Test = require('./../model/test.model')
+const User = require('./../model/user.model')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -22,5 +22,64 @@ router.post('/test', (req, res) => {
       return res.json({error: error})
     })
 })
+
+router.post('/signup', (req, res) => {
+  const userObject = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    role: 'admissionStaff',
+    isActive: true
+  }
+  const user = new User(userObject);
+  user.save()
+    .then(result => {
+      return res.json({result:result})
+    })
+    .catch(error => {
+      return res.json({error: error})
+    })
+})
+
+router.post('/login', (req, res) => {
+  User.findOne({ email: req.body.email, password: req.body.password })
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: "Auth failed"
+        });
+      }
+    return res.json ({message: 'successful'})
+  })
+})
+
+router.get("/users", function(req, res, next) {
+  User.find({})
+    .then(result => {
+      return res.status(200).json({
+        data: result
+      });
+    })
+    .catch(error => {
+      return res.status(500).json({
+        error: error
+      });
+    });
+});
+
+router.get("/users/:userid", function(req, res, next) {
+  const paramid = req.params.userid;
+  console.log(paramid);
+  User.findOneAndUpdate(
+    {_id: parseInt(paramid)},
+    {$set: {'firstName': 'anurodh'}},
+    (err, result) => {
+      console.log(result.firstName);
+      return res.status(200).json({
+        data: result
+    })
+  });      
+});
 
 module.exports = router;
