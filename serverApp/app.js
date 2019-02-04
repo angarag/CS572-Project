@@ -1,20 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var lessMiddleware = require('less-middleware');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const logger = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const path = require('path');
 const db = require('./db.js')
+
+const app = express();
 const port = process.env.port || 3400;
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-var validateToken = (req, res, next) => {
+const validateToken = (req, res, next) => {
   return (req, res, next) => {
     //if token exists, proceed, otherwise terminate
     if (db.checkJWT()) {
@@ -27,21 +24,21 @@ var validateToken = (req, res, next) => {
   }
 }
 
-app.use('/api', validateToken())
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
+app.use(cors())
+app.use(helmet())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+//Middleware
+app.use('/api', validateToken())
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//Routes
+app.use("/admin", require('./routes/admin'));
+
+//TO DO
+// app.use("/staff", require('./routes/staff'));
+// app.use("/student", require('./routes/student'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -56,6 +53,8 @@ app.use(function (err, req, res, next) {
     error: err
   });
 });
-app.listen(port);
+app.listen(port,()=>{
+  console.log(`Backend server is running on the port ${port}`)
+});
 
 module.exports = app;
