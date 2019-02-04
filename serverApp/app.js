@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
 const helmet = require('helmet');
@@ -7,7 +6,9 @@ const path = require('path');
 const db = require('./db.js')
 
 const app = express();
-const port = process.env.port || 3400;
+const port = process.env.port || 3600;
+
+var usersRouter = require('./routes/users');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -35,7 +36,7 @@ app.use('/api', validateToken())
 
 //Routes
 app.use("/admin", require('./routes/admin'));
-
+app.use('/api/users', usersRouter);
 //TO DO
 // app.use("/staff", require('./routes/staff'));
 // app.use("/student", require('./routes/student'));
