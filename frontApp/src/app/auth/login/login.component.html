@@ -15,20 +15,14 @@
                               <div class="form-group">
                                   <label for="uname1">Email</label>
                                   <input type="text" class="form-control form-control-lg rounded-0" formControlName = "email">
-                                  <div class="invalid-feedback" *ngIf="!loginForm.get('email').valid">Oops, you missed this one.</div>
+                                  <div class="invalid-feedback" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">Oops, you missed this one.</div>
                               </div>
                               <div class="form-group">
                                   <label>Password</label>
                                   <input type="password" class="form-control form-control-lg rounded-0" formControlName="password" autocomplete="new-password">
-                                  <div class="invalid-feedback" *ngIf="!loginForm.get('password').valid">Enter your password too!</div>
+                                  <div class="invalid-feedback" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">Enter your password too!</div>
                               </div>
-                              <!-- <div>
-                                  <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="checkbox" formControlName="remember">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description small text-dark">Remember me</span>
-                                  </label>
-                              </div> -->
+
                               <button type="submit" class="btn btn-success btn-lg float-left" id="btnLogin" [disabled]="!loginForm.valid">Login</button>
                           </form>
                       </div>

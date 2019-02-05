@@ -14,9 +14,7 @@ export class DisplayStaffComponent implements OnInit {
         this.staffs = res['data'];
       })
    }
-
-
-onButtonClicked(staff) {
+  onButtonClicked(staff) {
   console.log(staff.isActive);
   this.authService.updateUserbyId(staff)
   .subscribe(res => {
