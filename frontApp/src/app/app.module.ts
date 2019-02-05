@@ -12,6 +12,8 @@ import { LoaderComponent } from './static/loader/loader.component';
 import { AddStaffComponent } from './admin/add-staff/add-staff.component';
 import { DisplayStaffComponent } from './admin/display-staff/display-staff.component';
 import { QusetionsComponent } from './admin/qusetions/qusetions.component';
+import { StaffModule } from './staff/staff.module';
+import { HomeComponent } from './admin/home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +24,16 @@ import { QusetionsComponent } from './admin/qusetions/qusetions.component';
     LoaderComponent,
     AddStaffComponent,
     DisplayStaffComponent,
-    QusetionsComponent
+    QusetionsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StaffModule
   ],
   providers: [],
   bootstrap: [AppComponent]

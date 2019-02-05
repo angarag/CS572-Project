@@ -15,7 +15,17 @@ export class DisplayStaffComponent implements OnInit {
       })
    }
 
-  ngOnInit() {
+
+onButtonClicked(staff) {
+  console.log(staff.isActive);
+  this.authService.updateUserbyId(staff)
+  .subscribe(res => {
+    console.log(res);
+  })
+  staff.isActive=!staff.isActive;
+}
+
+ngOnInit() {
   }
 
 }
