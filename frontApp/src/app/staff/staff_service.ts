@@ -14,6 +14,11 @@ export class StaffService {
     }
 
     public sendInvitation(email){
+        this.http.get('http://localhost:3600/api'+'/getByEmail/'+email)
+        .subscribe((result)=>{
+            console.log(result)
+        })
+
         return this.http.get('http://localhost:3600/api' + "/students/invite/"+email);
     }
 }
