@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const checkAuth = require("./../middleware/check_authentication");
 
 
 const User = require('./../model/user.model')
@@ -145,19 +144,5 @@ router.post("/login", function(req, res, next) {
     });
 });
 
-// Checking if user is authenticated or not
-// router.get("/users", checkAuth, function(req, res, next) {
-//   User.find({})
-//     .then(result => {
-//       return res.status(200).json({
-//         data: result
-//       });
-//     })
-//     .catch(error => {
-//       return res.status(500).json({
-//         error: error
-//       });
-//     });
-// });
 
 module.exports = router;
