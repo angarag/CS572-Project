@@ -11,7 +11,7 @@ import { FooterComponent } from './static/footer/footer.component';
 import { LoaderComponent } from './static/loader/loader.component';
 import { AddStaffComponent } from './admin/add-staff/add-staff.component';
 import { DisplayStaffComponent } from './admin/display-staff/display-staff.component';
-import { QuestionComponent } from './admin/qusetions/qusetions.component';
+import { QuestionComponent } from './admin/questions/questions.component';
 import { StaffModule } from './staff/staff.module';
 import { StudentModule } from './student/student.module';
 import { HomeComponent } from './admin/home/home.component';
