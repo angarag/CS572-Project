@@ -11,7 +11,9 @@ import { FooterComponent } from './static/footer/footer.component';
 import { LoaderComponent } from './static/loader/loader.component';
 import { AddStaffComponent } from './admin/add-staff/add-staff.component';
 import { DisplayStaffComponent } from './admin/display-staff/display-staff.component';
+import { QusetionsComponent } from './admin/qusetions/qusetions.component';
 import { StaffModule } from './staff/staff.module';
+import { StudentModule } from './student/student.module';
 import { HomeComponent } from './admin/home/home.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthService } from './auth/auth_services/auth.service';
@@ -26,6 +28,7 @@ import { AuthInterceptor } from './interceptors/auth';
     LoaderComponent,
     AddStaffComponent,
     DisplayStaffComponent,
+    QusetionsComponent,
     HomeComponent
   ],
   imports: [
@@ -34,7 +37,8 @@ import { AuthInterceptor } from './interceptors/auth';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StaffModule
+    StaffModule,
+    StudentModule
   ],
   providers: [AuthGuard, AuthService, AuthInterceptor],
   bootstrap: [AppComponent]
