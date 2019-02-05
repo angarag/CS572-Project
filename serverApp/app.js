@@ -4,8 +4,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const path = require('path');
 const db = require('./db.js')
+const jwt = require('jsonwebtoken')
+const config = require('./keys')
 require('dotenv').config()
-
 
 const app = express();
 const port = process.env.port || 3600;
@@ -15,15 +16,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const validateToken = (req, res, next) => {
+  var signOptions = {
+    expiresIn: "12h"
+  };
   return (req, res, next) => {
     //if token exists, proceed, otherwise terminate
-    if (db.checkJWT()) {
-      console.log('token exists');
-      next();
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+      let token = req.headers.authorization.split(' ')[1];
+      jwt.verify(token, config.pk, (err, decoded) => {
+        if (err) {
+          console.log('invalid token')
+          next(new Error("Invalid Token"));
+        }
+        req.body.jwt = decoded;
+        next();
+      })
     }
-    else
-      res.json({ message: 'invalid token' })
-
+    else {
+      next(new Error("No Token"));
+    }
   }
 }
 
@@ -57,7 +68,7 @@ app.use(function (err, req, res, next) {
     error: err
   });
 });
-app.listen(port,()=>{
+app.listen(port, () => {
   console.log(`Backend server is running on the port ${port}`)
 });
 
