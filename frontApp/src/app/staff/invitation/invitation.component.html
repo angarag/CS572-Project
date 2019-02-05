@@ -1,0 +1,12 @@
+<div>
+
+  <input text="value" #q>
+  <button type="button" (click)="sendInvitation(q.value)" 
+  type="email" name="email" autocomplete="on"
+  >
+    send invitation
+  </button>
+<div *ngIf="one_response">
+  Email report: {{one_response}}
+</div>
+</div>

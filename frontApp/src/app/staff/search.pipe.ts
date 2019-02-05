@@ -7,7 +7,13 @@ export class SearchPipe implements PipeTransform {
 
   transform(items, field: string) {
     if (!items) return [];
-    return items.filter(i => i.invitation.status.includes(field));
+    if(!field) return items;
+    return items.filter(i=>
+      {
+        if(i.invitation.status)
+        return i.invitation.status.includes(field);
+
+      })
   }
 
 }
