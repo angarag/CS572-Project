@@ -11,8 +11,8 @@ import { InvitationComponent } from './invitation/invitation.component'
   imports: [
     CommonModule,
     RouterModule.forRoot([
-      {path:'students',component:StaffComponent},
-      {path:'inviteStudents',component:InvitationComponent}
+      {path:'staff/students',component:StaffComponent},
+      {path:'staff/inviteStudents',component:InvitationComponent}
     ])
   ],
   providers: [StaffService],

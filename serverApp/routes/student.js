@@ -3,9 +3,14 @@ const router = express.Router();
 const Student = require('../model/student.model');
 const nodemailer = require('nodemailer')
 const email={
-    username:'mars@mars.com',
-    password:'secret'
+    username:'mwa.mum.2019@gmail.com',
+    password:'rootroot'
 }
+const bcrypt = require('bcrypt');
+const saltRounds = 7;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 router.get("/getAll", function (req, res, next) {
     console.log('in /api/students route')
 
@@ -22,15 +27,7 @@ router.get("/getAll", function (req, res, next) {
         });
         
 });
-router.get('/invite/:email', (req, res) => {
-    
-    let student_email = req.params.email
-    console.log('sending email to: '+student_email);
-    //sendInvitations(student_email);
-    return res.json({
-        data:student_email
-    })
-});
+
 router.post('/upsert', (req, res) => {
     const {
         firstName,
@@ -67,26 +64,8 @@ router.post('/upsert', (req, res) => {
     
     }
     else{
-        console.log('creating student')
-        const studentObject = {
-            firstName: "_",
-            lastName: "_",
-            email: email,
-            entry: entry,
-            invitation:{
-                token: '_',
-                status: 'sent',
-                valid: true
-            }
-        }
-        const stu = new Student(studentObject);
-        stu.save()
-            .then(result => {
-                return res.json({ result: result })
-            })
-            .catch(error => {
-                return res.json({ error: error })
-            })
+        helper_createStudent(email,entry,res);
+       
     }
 })
 
@@ -120,7 +99,13 @@ router.get("/getByInvitationStatus/:istatus", function(req, res, next) {
       })  
 });
 
-function sendInvitations(to_whom){ 
+router.get('/invite/:email', (req, res) => {
+    
+    let student_email = req.params.email
+    console.log('sending email to: '+student_email);
+    sendInvitations(student_email,res);
+});
+function sendInvitations(to_whom,res){ 
     console.log('sending invitation email(s)')
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -133,16 +118,55 @@ function sendInvitations(to_whom){
       var mailOptions = {
         from: email.username,
         to: to_whom,
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
+        subject: 'Welcome to University A',
+        html: '<h1>That was easy!</h1>'
       };
       
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
+          return res.status(200).json({
+              data:false
+          })
         } else {
           console.log('Email sent: ' + info.response);
+          helper_createStudent(to_whom,undefined,res);
         }
       });
 }
+function helper_createStudent(email,entry,res){
+    console.log('creating student')
+    bcrypt.hash(email, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        const studentObject = {
+            firstName: "_",
+            lastName: "_",
+            email: email,
+            entry: (entry===undefined)?'Feb/2019':entry,
+            invitation:{
+                token: hash,
+                status: 'sent',
+                valid: true
+            }
+        }
+        const stu = new Student(studentObject);
+        stu.save()
+            .then(result => {
+                return res.json({ data: result })
+            })
+            .catch(error => {
+                return res.json({ data: error })
+            })
+      });
+
+}
+bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+    // Store hash in your password DB.
+    console.log(hash)
+    bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+        if(res)
+        console.log(true)
+    });
+  });
+
 module.exports = router;
