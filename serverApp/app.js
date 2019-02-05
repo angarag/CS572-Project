@@ -19,22 +19,27 @@ const validateToken = (req, res, next) => {
     expiresIn: "12h"
   };
   return (req, res, next) => {
-    //if token exists, proceed, otherwise terminate
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-      let token = req.headers.authorization.split(' ')[1];
-      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-          console.log('invalid token')
-          next(new Error("Invalid Token"));
-        }
-        console.log('token'+JSON.stringify(decoded))
-        req.body.jwt = decoded;
-        next();
-      })
-    }
+    console.log(req.url);
+    if (req.url === '/users/login')
+      return next()
     else {
-      console.log('no token')
-      next(new Error("No Token"));
+      //if token exists, proceed, otherwise terminate
+      if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+        let token = req.headers.authorization.split(' ')[1];
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+          if (err) {
+            console.log('invalid token')
+            next(new Error("Invalid Token"));
+          }
+          console.log('token' + JSON.stringify(decoded))
+          req.body.jwt = decoded;
+          next();
+        })
+      }
+      else {
+        console.log('no token')
+        next(new Error("No Token"));
+      }
     }
   }
 }
