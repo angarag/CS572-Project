@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Student = require('../model/student.model');
-
+const nodemailer = require('nodemailer')
+const email={
+    username:'mars@mars.com',
+    password:'secret'
+}
 router.get("/getAll", function (req, res, next) {
     console.log('in /api/students route')
+
     Student.find({})
         .then(result => {
             return res.status(200).json({
@@ -15,8 +20,17 @@ router.get("/getAll", function (req, res, next) {
                 error: error
             });
         });
+        
 });
-
+router.get('/invite/:email', (req, res) => {
+    
+    let student_email = req.params.email
+    console.log('sending email to: '+student_email);
+    //sendInvitations(student_email);
+    return res.json({
+        data:student_email
+    })
+});
 router.post('/upsert', (req, res) => {
     const {
         firstName,
@@ -105,4 +119,30 @@ router.get("/getByInvitationStatus/:istatus", function(req, res, next) {
         return res.json({ error: error })
       })  
 });
+
+function sendInvitations(to_whom){ 
+    console.log('sending invitation email(s)')
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: email.username,
+          pass: email.password
+        }
+      });
+      
+      var mailOptions = {
+        from: email.username,
+        to: to_whom,
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+}
 module.exports = router;
