@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    return localStorage.isAuthenticated;
+    return localStorage.isAuthenticated ==='true';
   }
 
   public isStaff() {
