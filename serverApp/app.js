@@ -4,6 +4,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 const path = require('path');
 const db = require('./db.js')
+require('dotenv').config()
+
 
 const app = express();
 const port = process.env.port || 3600;
