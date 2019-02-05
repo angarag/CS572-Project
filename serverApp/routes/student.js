@@ -106,6 +106,45 @@ router.get('/invite/:email', (req, res) => {
     console.log('sending email to: ' + student_email);
     sendInvitations(student_email, res);
 });
+
+router.get('/validateToken/:token', (req, res) => {
+    const token =  req.params.email
+    Student.findOne(
+        { 'invitation.token': token })
+        .then(result => {
+            return res.status(200).json({
+                data: result
+            })
+        })
+        .catch((error) => {
+            return res.json({ error: error })
+        })
+});
+
+router.post('/updateToken', (req, res) => {
+    const {
+        token,
+        status
+    } = req.body;
+    Student.findOneAndUpdate(
+        { 'invitation.token': token },
+        {
+            $set:
+            {
+                'invitation.status': status
+            }
+        })
+        .then(result => {
+            return res.status(200).json({
+                data: result
+            })
+        })
+        .catch((error) => {
+            return res.json({ error: error })
+        })
+});
+
+
 function sendInvitations(to_whom, res) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -116,7 +155,7 @@ function sendInvitations(to_whom, res) {
     });
     bcrypt.hash(to_whom, saltRounds, function (err, hash) {
         // Store hash in your password DB.
-        console.log('Token for new student:'+hash)
+        console.log('Token for new student:' + hash)
 
 
         var mailOptions = {
@@ -124,7 +163,7 @@ function sendInvitations(to_whom, res) {
             to: to_whom,
             subject: 'Welcome to University A',
             html: `<h1>That was easy!</h1>
-        <a href='http://localhost:4200/student/token/${hash}'>
+        <a href="http://localhost:4200/student/token/${hash}">
         Click me to take exam
         </a>
         `

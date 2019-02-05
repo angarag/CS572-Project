@@ -4,21 +4,18 @@ import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
-export class StaffService {
+export class StudentService {
     constructor(
         private http: HttpClient,
         private router: Router
     ) { }
-    public getStudents() {
-        return this.http.get('http://localhost:3600/api' + "/students/getAll");
+    public updateToken(obj) {
+        return this.http.post('http://localhost:3600/api' + "/students/updateToken",obj);
     }
-
+    public validateToken(token) {
+        return this.http.get('http://localhost:3600/api' + "/students/validateToken/"+token);
+    }
     public sendInvitation(email){
-        this.http.get('http://localhost:3600/api'+'/getByEmail/'+email)
-        .subscribe((result)=>{
-            console.log(result)
-        })
-
         return this.http.get('http://localhost:3600/api' + "/students/invite/"+email);
     }
 }
