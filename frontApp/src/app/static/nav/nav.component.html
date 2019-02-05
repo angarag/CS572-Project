@@ -1,63 +1,23 @@
-<!-- <div class="app-nav d-flex flex-column flex-md-row align-items-center navbar navbar-expand-lg">
-  <a [routerLink]="['/home']" class="navbar-brand">
-    <img [routerLink]="['/home']"
-     src="../../../assets/images/logo.png"
-      alt=""
-      class = "img-fluid"
-      id = "nav-logo">
-  </a>
-
-<div class="container">
-
-  <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
-
-  <span *ngIf="isAuthenticated()">
-    <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" [routerLink]="['home']">Home</a>
-        <a class="p-2 text-dark" [routerLink]="['']">Add Student</a>
-    </nav>
-  </span>
-
-  <span *ngIf="!isAuthenticated()">
-      <a [routerLink]="['/signup']" class="btn border-primary" style="margin-right:10px;">Sign Up</a>
-      <a [routerLink]="['/login']" class="btn border-success" >LogIn</a>
-  </span>
-  </div>
- </div> 
-
-
-
-
-
-
-
-
-
-
-
-
- -->
-
-
  <nav class = "navbar navbar-default">
   <div class = "container">
       <div class = 'navbar-header'>
-          <a href = '#' class = 'navbar-brand'>Screening App</a>
+          <a routerLink = '/login' class = 'navbar-brand'>Screening App</a>
       </div>
 
-      <div class = 'navbar-default'>
+        <div class = 'navbar-default'>
           <ul class = 'nav navbar-nav'>
               <li routerLinkActive = "active"><a routerLink = "/home">Home</a></li>
-              <li routerLinkActive = "active"><a routerLink = "/displaystaff">Staff</a></li>
+              <li routerLinkActive = "active"><a routerLink = "/displaystaff">Display Staff</a></li>
+              <li routerLinkActive = "active"><a routerLink = "/addstaff">Add Staff</a></li>
           </ul>
-
+        <div class = 'navbar-default'>   
           <ul class = 'nav navbar-nav navbar-right'>
-            <li><button class = 'btn btn-primary' (click) = 'onLogOut'>LogOut</button></li>
+            <li><a (click) = logout()>LogOut</a></li>
           </ul>
+        </div>  
       </div>
   </div>
 </nav>
-
 
 
 

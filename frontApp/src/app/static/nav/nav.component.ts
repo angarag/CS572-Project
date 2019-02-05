@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth_services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
-
-  isAuthenticated() {
-    return true;
+  constructor(private authService: AuthService) { }
+  logout() {
+    this.authService.logout();
   }
+
   navbarOpen = false;
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

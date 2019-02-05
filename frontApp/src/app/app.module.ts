@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +13,11 @@ import { AddStaffComponent } from './admin/add-staff/add-staff.component';
 import { DisplayStaffComponent } from './admin/display-staff/display-staff.component';
 import { QuestionComponent } from './admin/qusetions/qusetions.component';
 import { StaffModule } from './staff/staff.module';
+import { StudentModule } from './student/student.module';
 import { HomeComponent } from './admin/home/home.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AuthService } from './auth/auth_services/auth.service';
+import { AuthInterceptor } from './interceptors/auth';
 
 @NgModule({
   declarations: [
@@ -32,10 +36,9 @@ import { HomeComponent } from './admin/home/home.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    StaffModule
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
