@@ -26,8 +26,9 @@ export class AuthService {
     return this.http.get("http://localhost:3600/api/users/users");
   }
 
-  public updateUserbyId(userid){
-    return this.http.get("http://localhost:3600/api/users/users/"+userid);
+  public updateUserbyId(staff){
+    console.log('updateid api called');
+    return this.http.post("http://localhost:3600/api/users/users/", staff);
   }
 
   public loginSuccess(response) {
