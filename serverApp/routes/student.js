@@ -138,7 +138,6 @@ function helper_createStudent(email,entry,res){
     console.log('creating student')
     bcrypt.hash(email, saltRounds, function(err, hash) {
         // Store hash in your password DB.
-        console.log(hash)
         const studentObject = {
             firstName: "_",
             lastName: "_",
@@ -153,10 +152,10 @@ function helper_createStudent(email,entry,res){
         const stu = new Student(studentObject);
         stu.save()
             .then(result => {
-                return res.json({ result: result })
+                return res.json({ data: result })
             })
             .catch(error => {
-                return res.json({ error: error })
+                return res.json({ data: error })
             })
       });
 

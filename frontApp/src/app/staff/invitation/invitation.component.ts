@@ -15,9 +15,13 @@ export class InvitationComponent implements OnInit {
   sendInvitation(email){
     this.staffService.sendInvitation(email)
     .subscribe((res)=>{
-      console.log('email result:',+res['data']);
-      this.email_responses[email]=res['data'];
-      this.one_response=res['data'];
+      let response = res['data'];
+      if(response.code===11000)
+      this.one_response='User already exists';
+      else if(response._id)
+      this.one_response='Invitation email sent & User created';
+      console.log(response);
+      this.email_responses[email]=response;
 
     }
     );
