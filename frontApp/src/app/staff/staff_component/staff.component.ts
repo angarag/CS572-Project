@@ -9,12 +9,13 @@ export class StaffComponent implements OnInit {
   students;
   constructor(private staffService:StaffService) {
     this.staffService.getStudents()
-      .subscribe(res => {
-        this.students = res['data'];
-      })
+    .subscribe(res => {
+      this.students = res['data'];
+    })
    }
 
   ngOnInit() {
+
   }
 
 }

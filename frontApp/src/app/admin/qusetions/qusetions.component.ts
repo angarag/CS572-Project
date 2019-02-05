@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { QuestionsService } from './Services/question.service';
+ //import { QuestionService } from './.Services/question.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 declare let swal: any;
@@ -15,7 +15,8 @@ export class QuestionComponent implements OnInit {
   questionForm: FormGroup;
   control: any;
   private subscriber: any;
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private service: QuestionsService, private router: Router) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, 
+    private service: QuestionService, private router: Router) {
       this.questionForm = fb.group({
           'category': ['', Validators.required],
           'question': ['', Validators.required],

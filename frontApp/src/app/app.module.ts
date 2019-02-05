@@ -13,7 +13,11 @@ import { AddStaffComponent } from './admin/add-staff/add-staff.component';
 import { DisplayStaffComponent } from './admin/display-staff/display-staff.component';
 import { QuestionComponent } from './admin/qusetions/qusetions.component';
 import { StaffModule } from './staff/staff.module';
+import { StudentModule } from './student/student.module';
 import { HomeComponent } from './admin/home/home.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AuthService } from './auth/auth_services/auth.service';
+import { AuthInterceptor } from './interceptors/auth';
 
 @NgModule({
   declarations: [
@@ -33,9 +37,10 @@ import { HomeComponent } from './admin/home/home.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StaffModule
+    StaffModule,
+    StudentModule
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService, AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
