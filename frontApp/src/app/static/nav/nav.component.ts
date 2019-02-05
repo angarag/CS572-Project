@@ -9,9 +9,6 @@ export class NavComponent implements OnInit {
 
   constructor() { }
 
-  isAuthenticated() {
-    return true;
-  }
   navbarOpen = false;
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
