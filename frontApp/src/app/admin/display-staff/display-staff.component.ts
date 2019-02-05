@@ -22,6 +22,7 @@ onButtonClicked(staff) {
   .subscribe(res => {
     console.log(res);
   })
+  staff.isActive=!staff.isActive;
 }
 
 ngOnInit() {
