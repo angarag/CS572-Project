@@ -32,6 +32,7 @@ export class LoginComponent  {
     this.authService.login(user)
     .subscribe(res => {
       this.authService.loginSuccess(res);
+      console.log('IS AUTHENTICATED'+this.authService.isLoggedIn())
       this.router.navigate(['/home'])
     },
     err => console.log(err)

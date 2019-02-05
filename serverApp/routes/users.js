@@ -105,11 +105,11 @@ router.post("/login", function(req, res, next) {
     .then(result => {
       console.log(result);
       if (!result) {
-        res.status(401).json({
-          message: "Worng password"
-        });
+       // res.status(401).json({
+        //  message: "Worng password"
+        //});
+        console.log('wrong password');
       }
-
       console.log("I am here");
       const token = jwt.sign(
         {
@@ -120,16 +120,6 @@ router.post("/login", function(req, res, next) {
         process.env.JWT_SECRET,
         { expiresIn: "2h" }
       );
-      // let profile;
-      // if (fetchedUser.role === "seeker") {
-      //   profile = fetchedUser.profile.user;
-      // } else {
-      //   profile = {
-      //     ...fetchedUser.profile.company,
-      //     fullName: fetchedUser.firstName + " " + fetchedUser.lastName
-      //   };
-      // }
-
       return res.status(200).json({
         _token: token,
         _expiresIn: 7200,
