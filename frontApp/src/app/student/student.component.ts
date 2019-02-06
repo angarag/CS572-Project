@@ -16,11 +16,11 @@ export class StudentComponent implements OnInit {
     private service: StudentService) {
     this.subscription = this.activatedRoute.queryParams.subscribe(
       (param: any) => {
-        this.token=param['token'];
+        this.token = param['token'];
         this.service.validateToken(this.token)
           .subscribe((result) => {
-            if(result['error'] || result['data']==null)
-            this.router.navigate(['/']);
+            if (result['error'] || result['data'] == null)
+              this.router.navigate(['/']);
             console.log('invitation token status below')
             console.log(result['data'].invitation.status)
             if (result['data'].invitation.status !== 'sent')
@@ -31,9 +31,9 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
     this.service.getRandomQuestions()
-    .subscribe(res => {
-      this.questions = res['data'];
-    })
+      .subscribe(res => {
+        this.questions = res['data'];
+      })
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -42,8 +42,8 @@ export class StudentComponent implements OnInit {
       status: 'seen'
     }
     this.service.updateToken(obj)
-    .subscribe((result)=>{
-      console.log(result);
-    })
+      .subscribe((result) => {
+        console.log(result);
+      })
   }
 }
