@@ -12,6 +12,10 @@ export class StudentService {
     public updateToken(obj) {
         return this.http.post('http://localhost:3600/api' + "/students/updateToken",obj);
     }
+    public saveAnswers(obj) {
+        return this.http.post('http://localhost:3600/api' + "/students/saveQuestionAnswersWithInvitationToken",obj);
+    }
+   
     public validateToken(token) {
         return this.http.get('http://localhost:3600/api' + "/students/validateToken?token="+token);
     }

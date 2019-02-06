@@ -21,6 +21,10 @@
     "@angular/router": "~7.1.0",
     "bootstrap": "^3.4.0",
     "core-js": "^2.5.4",
+<<<<<<< HEAD
+=======
+    "debounce": "^1.2.0",
+>>>>>>> 8534f922ca644c6cd00eece6f447ba1d53cb26a9
     "ng2-ace-editor": "^0.3.9",
     "rxjs": "~6.3.3",
     "simple-line-icons": "^2.4.1",
