@@ -65,12 +65,14 @@ export class AuthService {
       const token = response._token;
       const role = response._role;
       const expiresIn = response._expiresIn;
+      const firstName = response._firstName;
+      const lastName = response._lastName;
       this.isAuthenticated = true;
       this.jwtToken = token;
       this.setAuthTimer(expiresIn);
       const now = new Date();
       const expirationDate = new Date(now.getTime() + expiresIn * 1000);
-      this.saveAuthData(token, role, expirationDate);
+      this.saveAuthData(token, role, expirationDate, firstName, lastName);
     }
 
   private setAuthTimer(duration: number) {
@@ -83,12 +85,15 @@ export class AuthService {
     token: string,
     role: string,
     expirationDate: Date,
-  
+    firstName: string,
+    lastName: string
   ) {
     localStorage.setItem("token", token);
     localStorage.setItem("isAuthenticated", "true");
     localStorage.setItem("role", role);
     localStorage.setItem("expiration", expirationDate.toISOString());
+    localStorage.setItem("firstName", firstName);
+    localStorage.setItem("lastName", lastName);
   }
 
   private clearAuthData() {
@@ -96,6 +101,8 @@ export class AuthService {
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("role");
     localStorage.removeItem("expiration");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
   }
 
   private getAuthData() {
