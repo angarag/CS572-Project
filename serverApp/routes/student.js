@@ -148,6 +148,45 @@ router.post('/updateToken', (req, res) => {
 });
 
 
+router.post('/saveQuestionAnswersWithInvitationToken', (req, res) => {
+    const {
+        token,
+        q1a,
+        q2a,
+        q3a,
+        status,
+        q1,
+        q2,
+        q3
+    } = req.body;
+    console.log(q1a,q2a,q3a)
+    Student.findOneAndUpdate(
+        { 'invitation.token': token },
+        {
+            $set:
+            {
+                'questions.0.snapshots': q1a,
+                'questions.1.snapshots': q2a,
+                'questions.2.snapshots': q3a,
+                'invitation.status': status,
+                'questions.0.question':q1,
+                'questions.1.question':q2,
+                'questions.2.question':q3,
+                'questions.0.answer':q1a[q1a.length-1],
+                'questions.1.answer':q2a[q2a.length-1],
+                'questions.2.answer':q3a[q3a.length-1],
+            }
+        })
+        .then(result => {
+            return res.status(200).json({
+                data: result
+            })
+        })
+        .catch((error) => {
+            return res.json({ error: error })
+        })
+
+});
 function sendInvitations(to_whom, res) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',

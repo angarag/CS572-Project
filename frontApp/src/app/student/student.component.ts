@@ -100,5 +100,20 @@ export class StudentComponent implements OnInit {
   onSubmit() {
     console.log('submit answers clicked')
     console.log(this.answers)
+    const obj = {
+      token:this.token,
+      q1a: this.answers[0],
+      q2a: this.answers[1],
+      q3a: this.answers[2],
+      q1:this.questions[0].question,
+      q2:this.questions[1].question,
+      q3:this.questions[2].question,
+      status:'answered'
+    }
+    this.service.saveAnswers(obj)
+        .subscribe((result) => {
+          console.log(result);
+        })
+    
   }
 }
