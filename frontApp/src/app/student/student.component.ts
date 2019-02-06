@@ -3,8 +3,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { StudentService } from "./student_service";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { debounce } from "debounce";
 
 @Component({
+  
   selector: 'app-student',
   templateUrl: './student.component.html',
   styles: []
@@ -13,7 +15,10 @@ export class StudentComponent implements OnInit {
   private subscription: Subscription;
   token;
   questions;
+  text:string = "";
+    options:any = {maxLines: 1000, printMargin: false};
   private answerForm: FormGroup;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -59,6 +64,9 @@ export class StudentComponent implements OnInit {
         console.log(result);
       })
   }
+  onChange(code,id) {
+    console.log(id,"new snapshot:", code);
+}
 
 
   onSubmit() {

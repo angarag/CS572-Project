@@ -15,16 +15,17 @@
 
                 <div *ngFor="let question of questions;let num=index">
                   <form class="form" [formGroup]="answerForm" (ngSubmit)="onSubmit()">
-                      <div class="form-group">
-                        <label for="uname1"> {{question.category}} : {{question.question}}</label>
-                        <input type="text" class="form-control form-control-lg rounded-0" formControlName="answer{{num+1}}">
-                      </div>
-                    </form>
+                    <div class="form-group">
+                      <label for="uname1"> {{question.category}} : {{question.question}}</label>
+                      <div ace-editor [text]="text" [mode]="'java'" [theme]="'clouds'" [options]="options" [readOnly]="false"
+                        [autoUpdateContent]="true" (textChanged)="onChange($event,q.id)" style="min-height: 200px; width:100%; overflow: auto;"
+                        id="{{num}}" #q></div>
+                    </div>
+                  </form>
                 </div>
-                <button type="button" class="btn btn-primary btn-lg float-left"
-                (click)="onSubmit()"
-                id="btnLogin" [disabled]="false">
-                Submit answers</button>
+                <button type="button" class="btn btn-primary btn-lg float-left" (click)="onSubmit()" id="btnLogin"
+                  [disabled]="false">
+                  Submit answers</button>
               </div>
             </div>
             <!--/row-->
