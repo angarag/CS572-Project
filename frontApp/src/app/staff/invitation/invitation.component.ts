@@ -13,8 +13,7 @@ export class InvitationComponent implements OnInit {
   ngOnInit() {
   }
   sendInvitation(email) {
-    this.staffService.sendInvitation(email)
-      .subscribe((res) => {
+    this.staffService.sendInvitation(email).subscribe((res) => {
         let response = res['data'];
         if (response.code === 11000)
           this.one_response = 'User already exists';
@@ -23,6 +22,6 @@ export class InvitationComponent implements OnInit {
         console.log(response);
         this.email_responses[email] = response;
       }
-      );
+      )
   }
 }
