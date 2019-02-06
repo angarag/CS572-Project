@@ -10,6 +10,7 @@ import { StudentService } from "./student_service";
 export class StudentComponent implements OnInit {
   private subscription: Subscription;
   token;
+  questions;
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private service: StudentService) {
@@ -18,6 +19,8 @@ export class StudentComponent implements OnInit {
         this.token=param['token'];
         this.service.validateToken(this.token)
           .subscribe((result) => {
+            if(result['error'] || result['data']==null)
+            this.router.navigate(['/']);
             console.log('invitation token status below')
             console.log(result['data'].invitation.status)
             if (result['data'].invitation.status !== 'sent')
@@ -27,7 +30,10 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+    this.service.getRandomQuestions()
+    .subscribe(res => {
+      this.questions = res['data'];
+    })
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

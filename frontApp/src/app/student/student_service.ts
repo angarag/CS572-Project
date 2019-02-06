@@ -18,4 +18,7 @@ export class StudentService {
     public sendInvitation(email){
         return this.http.get('http://localhost:3600/api' + "/students/invite/"+email);
     }
+    public getRandomQuestions() {
+        return this.http.get('http://localhost:3600/api' + "/questions/getRandomOnes");
+    }
 }

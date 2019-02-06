@@ -84,5 +84,21 @@ router.post("/updatequestion", function(req, res, next) {
     })
   });      
 });
+router.get("/getRandomOnes", function (req, res, next) {
+  Question.findRandom({active:true}, {}, {limit: 3}, function(err, results) {
+    if (!err) {
+      console.log(results); // 3 elements
+      return res.status(200).json({
+        data: results
+    });
+    }
+    else {
+      return res.status(500).json({
+        error: err
+    });
+    }
+  });
+
+});
 
 module.exports = router;
