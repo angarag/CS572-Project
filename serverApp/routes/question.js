@@ -43,10 +43,10 @@ router.post("/addquestion", function(req, res, next) {
     });
 });
 
-Question.post("/question", function(req, res, next) {
+router.post("/question", function(req, res, next) {
     Active =req.body.Active;
     console.log(Active);
-    User.findOneAndUpdate(
+    Question.findOneAndUpdate(
       {_id: req.body._id},
       {$set: {'Active': Active}},
       (err, result) => {
