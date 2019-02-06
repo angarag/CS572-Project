@@ -12,13 +12,10 @@ export class StaffService {
     public getStudents() {
         return this.http.get('http://localhost:3600/api' + "/students/getAll");
     }
-
-    public sendInvitation(email){
-        this.http.get('http://localhost:3600/api'+'/students/getByEmail/'+email)
-        .subscribe((result)=>{
-            console.log(result)
-        })
-
-        return this.http.get('http://localhost:3600/api' + "/students/invite/"+email);
+    public getByEmail(email) {
+        return this.http.get('http://localhost:3600/api' + '/students/getByEmail/' + email);
+    }
+    public sendInvitation(email) {
+        return this.http.get('http://localhost:3600/api' + "/students/invite/" + email);
     }
 }

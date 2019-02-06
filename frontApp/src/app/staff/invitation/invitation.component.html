@@ -1,12 +1,13 @@
-<div>
+<div class="container">
+  <div class="col-xs-4">
+    <input text="value" #q class="form-control">
+    <button type="button" (click)="sendInvitation(q.value)" class="btn btn-primary" type="email" name="email"
+      autocomplete="on">
+      send invitation
+    </button>
+    <div *ngIf="one_response">
+      Email report: {{one_response}}
+    </div>
 
-  <input text="value" #q>
-  <button type="button" (click)="sendInvitation(q.value)" 
-  type="email" name="email" autocomplete="on"
-  >
-    send invitation
-  </button>
-<div *ngIf="one_response">
-  Email report: {{one_response}}
-</div>
+  </div>
 </div>
