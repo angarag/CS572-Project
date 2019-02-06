@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import {StudentService} from "./student_service";
+import { StudentService } from "./student_service";
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -12,31 +12,32 @@ export class StudentComponent implements OnInit {
   token;
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
-    private service:StudentService) {
-
-      
-    this.subscription = this.activatedRoute.params.subscribe(
+    private service: StudentService) {
+    this.subscription = this.activatedRoute.queryParams.subscribe(
       (param: any) => {
-      this.token = param['token']
-        localStorage.setItem('token', this.token)
-
+        this.token=param['token'];
         this.service.validateToken(this.token)
-        .subscribe((result)=>{
-          console.log(result['data'].invitation.status)
-          if(result['data'].invitation.status!=='sent')
-          this.router.navigate(['/']);
-        })
+          .subscribe((result) => {
+            console.log('invitation token status below')
+            console.log(result['data'].invitation.status)
+            if (result['data'].invitation.status !== 'sent')
+              this.router.navigate(['/']);
+          })
       })
   }
 
   ngOnInit() {
-    const obj = {
-      token:this.token,
-      status: 'seen'
-    }
-    this.service.updateToken(obj)
+   
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    const obj = {
+      token: this.token,
+      status: 'seen'
+    }
+    this.service.updateToken(obj)
+    .subscribe((result)=>{
+      console.log(result);
+    })
   }
 }

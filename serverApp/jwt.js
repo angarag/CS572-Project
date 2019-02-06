@@ -2,7 +2,7 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const config = require('./keys')
+
 
 // PAYLOAD
 var payload = {
@@ -41,7 +41,7 @@ var signOptions = {
     //algorithm: "RS256"
 };
 
-var token = jwt.sign(payload, config.pk, signOptions);
-var legit = jwt.verify(token, config.pk, signOptions);
+var token = jwt.sign(payload, process.env.JWT_SECRET, signOptions);
+var legit = jwt.verify(token, process.env.JWT_SECRET, signOptions);
 console.log("\nJWT verification result: " + JSON.stringify(legit));
 console.log("Token - " + token)

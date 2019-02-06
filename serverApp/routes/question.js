@@ -5,10 +5,20 @@ const jwt = require("jsonwebtoken");
 const Question = require('../model/question');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get("/", function (req, res, next) {
 
+    Question.find({})
+            .then(result => {
+                return res.status(200).json({
+                    data: result
+                });
+            })
+            .catch(error => {
+                return res.status(500).json({
+                    error: error
+                });
+            });
+        });
 router.post("/addquestion", function(req, res, next) {
   const question = new Question({
   category: req.body.category,

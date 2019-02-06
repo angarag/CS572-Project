@@ -13,7 +13,7 @@ export class StudentService {
         return this.http.post('http://localhost:3600/api' + "/students/updateToken",obj);
     }
     public validateToken(token) {
-        return this.http.get('http://localhost:3600/api' + "/students/validateToken/"+token);
+        return this.http.get('http://localhost:3600/api' + "/students/validateToken?token="+token);
     }
     public sendInvitation(email){
         return this.http.get('http://localhost:3600/api' + "/students/invite/"+email);
