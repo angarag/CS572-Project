@@ -43,6 +43,19 @@ router.post("/addquestion", function(req, res, next) {
     });
 });
 
+Question.post("/question", function(req, res, next) {
+    Active =req.body.Active;
+    console.log(Active);
+    User.findOneAndUpdate(
+      {_id: req.body._id},
+      {$set: {'Active': Active}},
+      (err, result) => {
+        console.log(result.firstName);
+        return res.status(200).json({
+          data: result
+      })
+    });      
+  });
 
 router.get("/displayquestion", function(req, res, next) {
   Question.find({})
