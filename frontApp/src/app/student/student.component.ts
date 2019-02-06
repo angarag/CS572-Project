@@ -27,6 +27,10 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit() {
+   
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
     const obj = {
       token: this.token,
       status: 'seen'
@@ -35,8 +39,5 @@ export class StudentComponent implements OnInit {
     .subscribe((result)=>{
       console.log(result);
     })
-  }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
