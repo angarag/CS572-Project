@@ -13,6 +13,7 @@ export class InvitationComponent implements OnInit {
   ngOnInit() {
   }
   sendInvitation(email) {
+    this.one_response=null;
     this.staffService.getByEmail(email).subscribe(res => {
       if (res['error']) {
         this.staffService.sendInvitation(email).subscribe(res => {
