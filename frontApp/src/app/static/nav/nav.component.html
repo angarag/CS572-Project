@@ -5,7 +5,7 @@
       </div>
 
         <div class = 'navbar-default'>
-          <ul class = 'nav navbar-nav'>
+          <ul class = 'nav navbar-nav' *ngIf = 'isAdminPage()'>
               <li routerLinkActive = "active"><a routerLink = "/home">Home</a></li>
               <li routerLinkActive = "active"><a routerLink = "/displaystaff">Display Staff</a></li>
               <li routerLinkActive = "active"><a routerLink = "/addstaff">Add Staff</a></li>
