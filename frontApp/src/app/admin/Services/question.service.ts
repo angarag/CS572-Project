@@ -1,26 +1,25 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from "./common/services/host.service";
 
 @Injectable()
-export class QuestionsService {
-    constructor(private config: ConfigService, private http: HttpClient){}
+export class QuestionService {
+    constructor(private http: HttpClient){}
   
    
     addQuestion(body) {
-        return this.http.post(this.config.BASE_API_URL+"questions", body, {
+        return this.http.post('http://localhost:3600/api/'+"questions", body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
         });
     }
     updateQuestion(id, body) {
-        return this.http.patch(this.config.BASE_API_URL+"questions/"+id, body, {
+        return this.http.patch('http://localhost:3600/api/'+"questions/"+id, body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
         });
     }
     getQuestions(){
-        return this.http.get(this.config.BASE_API_URL+"questions");
+        return this.http.get('http://localhost:3600/api/'+"questions");
     }
     getQuestion(id:string){
-        return this.http.get(this.config.BASE_API_URL+"questions/"+id);
+        return this.http.get('http://localhost:3600/api/'+"questions/"+id);
     }
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StudentComponent } from './student.component';
 import { RouterModule } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
-
+import {StudentService} from './student_service';
 @NgModule({
   declarations: [StudentComponent, SignupComponent],
   imports: [
@@ -14,6 +14,7 @@ import { SignupComponent } from './signup/signup.component';
     ])
 
   ],
+  providers:[StudentService],
   bootstrap:[StudentComponent]
 })
 export class StudentModule { }
