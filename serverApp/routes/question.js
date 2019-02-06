@@ -43,10 +43,10 @@ router.post("/addquestion", function(req, res, next) {
     });
 });
 
-Question.post("/question", function(req, res, next) {
+router.post("/question", function(req, res, next) {
     Active =req.body.Active;
     console.log(Active);
-    User.findOneAndUpdate(
+    Question.findOneAndUpdate(
       {_id: req.body._id},
       {$set: {'Active': Active}},
       (err, result) => {
@@ -83,6 +83,22 @@ router.post("/updatequestion", function(req, res, next) {
         data: result
     })
   });      
+});
+router.get("/getRandomOnes", function (req, res, next) {
+  Question.findRandom({active:true}, {}, {limit: 3}, function(err, results) {
+    if (!err) {
+      console.log(results); // 3 elements
+      return res.status(200).json({
+        data: results
+    });
+    }
+    else {
+      return res.status(500).json({
+        error: err
+    });
+    }
+  });
+
 });
 
 module.exports = router;
