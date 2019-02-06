@@ -1,0 +1,53 @@
+<div class = 'container'>
+  <div class="container py-5">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <h2 class="text-center text-white mb-4">Login Form</h2> -->
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+    
+              <!-- form card login -->
+              <div class="card rounded-0">
+                <div class="card-header">
+                  <h3 class="mb-0">Add Question</h3>
+                </div>
+                <div class="card-body">
+                <form  [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form">      
+                  <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" class="form-control" formControlName = "category">
+                      <option selected>Node</option>
+                      <option>Express</option>
+                      <option>Angular</option>
+                    </select>
+                    <div class="invalid-feedback" 
+                    *ngIf="!questionForm.get('category').valid && questionForm.get('category').touched">
+                        Oops, you missed this one.
+                    </div>
+                  </div>
+
+                <div class="form-group">
+                  <label for="uname1">Add Question</label>
+                  <input type="text" class="form-control form-control-lg rounded-0" formControlName="question">
+                  <div class="invalid-feedback" 
+                  *ngIf="!questionForm.get('category').valid && questionForm.get('category').touched">
+                    Oops, you missed this one.
+                  </div>
+                </div>
+
+        
+                <button type="submit" 
+                class="btn btn-primary btn-lg float-left" 
+                id="btnLogin" [disabled]="!questionForm.valid">Submit</button>
+              </form>
+              </div>
+            </div>
+            <!--/row-->
+      
+          </div>
+          <!--/col-->
+        </div>
+        <!--/row-->
+      </div>
+      <!--/container-->
+    </div>

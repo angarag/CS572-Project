@@ -1,0 +1,36 @@
+<div class="container">
+    <a routerLink = "/addquestion">
+      <button class = 'btn btn-primary pull-right'>
+        Add Question
+      </button>
+    </a>
+    <br>
+    <br>
+<hr>
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Category</th>
+          <th scope="col">Created at</th>
+          <th scope="col">Status</th>
+          <th scope="col">Change Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let question of questions">
+          <td>{{question.question}}</td>
+          <td>{{question.category}}</td>
+          <td>{{question.created_at | date}}</td>
+          <td>{{question.active?'Active':'DeActive'}}</td>
+          <td>
+          <button class = 'btn btn-info' 
+            (click)= "onButtonClicked(question)"> {{question.active?'Deactivate':'Activate'}}
+          </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
