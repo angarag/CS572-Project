@@ -7,6 +7,9 @@ import { HomeComponent } from './admin/home/home.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AddQuestionComponent } from './question/add-question/add-question.component';
 import { DisplayQuestionComponent } from './question/display-question/display-question.component';
+import { GenerateResultComponent } from './admin/generate-result/generate-result.component';
+import { ReviewAnswerComponent } from './admin/review-answer/review-answer.component';
+import { ResultStartComponent } from './admin/result-start/result-start.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,6 +19,10 @@ const routes: Routes = [
   { path: 'displaystaff', component: DisplayStaffComponent, canActivate: [AuthGuard] },
   { path: 'addquestion', component: AddQuestionComponent },
   { path: 'displayquestion', component: DisplayQuestionComponent },
+  {path:'generateresult', component:GenerateResultComponent, children: [
+    {path: '', component: ResultStartComponent},
+    {path: ':id', component: ReviewAnswerComponent}
+  ]}
 
 ];
 
