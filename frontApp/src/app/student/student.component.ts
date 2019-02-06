@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { StudentService } from "./student_service";
-<<<<<<< HEAD
-
-=======
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { debounce } from "debounce";
->>>>>>> 8534f922ca644c6cd00eece6f447ba1d53cb26a9
 
 @Component({
 

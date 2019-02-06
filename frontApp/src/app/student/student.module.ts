@@ -11,11 +11,8 @@ import { AceEditorModule } from 'ng2-ace-editor';
   declarations: [StudentComponent, SignupComponent],
   imports: [
     CommonModule,
-<<<<<<< HEAD
-=======
     FormsModule,
     ReactiveFormsModule,
->>>>>>> 8534f922ca644c6cd00eece6f447ba1d53cb26a9
     AceEditorModule,
     RouterModule.forRoot([
       {path:'student/signup',component:SignupComponent},
