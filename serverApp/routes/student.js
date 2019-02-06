@@ -28,6 +28,22 @@ router.get("/getAll", function (req, res, next) {
 
 });
 
+router.get("/getAll/:id", function (req, res, next) {
+
+    Student.findOne({_id: req.params.id})
+        .then(result => {
+            return res.status(200).json({
+                data: result
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                error: error
+            });
+        });
+
+});
+
 router.post('/upsert', (req, res) => {
     const {
         firstName,

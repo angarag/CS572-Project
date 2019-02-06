@@ -25,4 +25,12 @@ export class StudentService {
     public getRandomQuestions() {
         return this.http.get('http://localhost:3600/api' + "/questions/getRandomOnes");
     }
+
+    public getStudents() {
+        return this.http.get('http://localhost:3600/api' + "/students/getAll");
+    }
+
+    public getStudentsbyId(id) {
+        return this.http.get('http://localhost:3600/api' + "/students/getAll/"+id);
+    }
 }

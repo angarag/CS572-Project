@@ -19,6 +19,13 @@ import { AuthService } from './auth/auth_services/auth.service';
 import { AuthInterceptor } from './interceptors/auth';
 import { AddQuestionComponent } from './question/add-question/add-question.component';
 import { DisplayQuestionComponent } from './question/display-question/display-question.component';
+import { DisplayResultComponent } from './admin/display-result/display-result.component';
+import { ReviewAnswerComponent } from './admin/review-answer/review-answer.component';
+import { GenerateResultComponent } from './admin/generate-result/generate-result.component';
+import { StudentService } from './student/student_service';
+import { ResultItemComponent } from './admin/result-item/result-item.component';
+import { AdminService } from './admin/admin.service';
+import { ResultStartComponent } from './admin/result-start/result-start.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,12 @@ import { DisplayQuestionComponent } from './question/display-question/display-qu
     DisplayStaffComponent,
     HomeComponent,
     AddQuestionComponent,
-    DisplayQuestionComponent
+    DisplayQuestionComponent,
+    DisplayResultComponent,
+    ReviewAnswerComponent,
+    GenerateResultComponent,
+    ResultItemComponent,
+    ResultStartComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +54,8 @@ import { DisplayQuestionComponent } from './question/display-question/display-qu
     StudentModule,
     StaffModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AuthService, AuthGuard],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+             AuthService, AuthGuard, StudentService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

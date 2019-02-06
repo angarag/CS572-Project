@@ -20,7 +20,7 @@ import { AceEditorModule } from 'ng2-ace-editor';
     ])
 
   ],
-  providers:[StudentService],
+  providers:[],
   bootstrap:[StudentComponent]
 })
 export class StudentModule { }
