@@ -1,18 +1,43 @@
-<div class="container">
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th scope="col">Category</th>
-    <th scope="col">Question</th>
-  </tr>
-</thead>
-<tbody>
-  <tr *ngFor = "let question of questions">
-    <td>{{question.category}}</td>
-    <td>{{question.question}}</td>
-  </tr>
-</tbody>
-</table>
+<div class='container'>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- <h2 class="text-center text-white mb-4">Login Form</h2> -->
+        <div class="row">
+          <div class="col-md-12 mx-auto" *ngIf="is_started==false">
+            <button type="button" (click)="onStart()">
+              Click to start taking exam
+            </button>
+          </div>
+          <div class="col-md-12 mx-auto" *ngIf="is_started">
+            <!-- form card login -->
+            <div class="card rounded-0">
+              <div class="card-header">
+                <h3 class="mb-0">Student Pretest</h3>
+              </div>
+              <div class="card-body">
 
-</div>
+                <div *ngFor="let question of questions;let num=index">
+                  <form class="form" [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                      <label for="uname1"> {{question.category}} : {{question.question}}</label>
+                      <div ace-editor [text]="text" [mode]="'java'" [theme]="'clouds'" [options]="options" [readOnly]="false"
+                        [autoUpdateContent]="true" (textChanged)="onChange($event,q.id)" style="min-height: 200px; width:100%; overflow: auto;"
+                        id="{{num}}" #q></div>
+                    </div>
+                  </form>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg float-left" (click)="onSubmit()" id="btnLogin"
+                  [disabled]="false">
+                  Submit answers</button>
+              </div>
+            </div>
+            <!--/row-->
 
+          </div>
+          <!--/col-->
+        </div>
+        <!--/row-->
+      </div>
+      <!--/container-->
+    </div>
