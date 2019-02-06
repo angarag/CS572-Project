@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
- //import { QuestionService } from './.Services/question.service';
+import { QuestionService } from '../Services/question.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 declare let swal: any;
 
 @Component({
   selector: 'question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css']
+  templateUrl: './questions.component.html',
+  styleUrls: ['./questions.component.css']
 })
 export class QuestionComponent implements OnInit {
   question_id: string;
   questionForm: FormGroup;
   control: any;
   private subscriber: any;
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, 
-    private service: QuestionService, private router: Router) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private service: QuestionService, private router: Router) {
       this.questionForm = fb.group({
           'category': ['', Validators.required],
           'question': ['', Validators.required],
@@ -26,6 +25,7 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
     this.subscriber = this.route.params.subscribe(params => {
       this.question_id = params['id'];
     });
@@ -44,9 +44,11 @@ export class QuestionComponent implements OnInit {
           }
         }, (error)=>{console.log(error)}, () => {});
     }
+    */
   }
 
   onSubmit() {
+    /*
     if(this.question_id) {
       this.subscriber = this.service.updateQuestion(this.question_id, JSON.stringify(this.questionForm.value))
       .subscribe((response: any) => {
@@ -72,6 +74,7 @@ export class QuestionComponent implements OnInit {
         (error) => { console.log(error), () => {}}
       );
     }
+    */
   }
 
   ngOnDestroy() {
