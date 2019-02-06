@@ -10,7 +10,7 @@ import {StudentService} from './student_service';
     CommonModule,
     RouterModule.forRoot([
       {path:'student/signup',component:SignupComponent},
-      {path:'student/token/:token',component:StudentComponent}
+      {path:'student/token',component:StudentComponent}
     ])
 
   ],

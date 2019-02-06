@@ -13,12 +13,12 @@ export class StudentComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private service: StudentService) {
-
-
-    this.subscription = this.activatedRoute.params.subscribe(
+    this.subscription = this.activatedRoute.queryParams.subscribe(
       (param: any) => {
+        this.token=param['token'];
         this.service.validateToken(this.token)
           .subscribe((result) => {
+            console.log('invitation token status below')
             console.log(result['data'].invitation.status)
             if (result['data'].invitation.status !== 'sent')
               this.router.navigate(['/']);
@@ -32,6 +32,9 @@ export class StudentComponent implements OnInit {
       status: 'seen'
     }
     this.service.updateToken(obj)
+    .subscribe((result)=>{
+      console.log(result);
+    })
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

@@ -107,8 +107,9 @@ router.get('/invite/:email', (req, res) => {
     sendInvitations(student_email, res);
 });
 
-router.get('/validateToken/:token', (req, res) => {
-    const token =  req.params.email
+router.get('/validateToken', (req, res) => {
+    const token =  req.query.token;
+    console.log('Token:'+token)
     Student.findOne(
         { 'invitation.token': token })
         .then(result => {
@@ -163,7 +164,7 @@ function sendInvitations(to_whom, res) {
             to: to_whom,
             subject: 'Welcome to University A',
             html: `<h1>That was easy!</h1>
-        <a href="http://localhost:4200/student/token/${hash}">
+        <a href="http://localhost:4200/student/token?token=${hash}">
         Click me to take exam
         </a>
         `

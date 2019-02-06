@@ -20,8 +20,10 @@ const validateToken = (req, res, next) => {
   };
   return (req, res, next) => {
     console.log(req.url);
-    if (req.url === '/users/login')
+    if (req.url === '/users/login' || req.url.includes('Token')){
+      console.log('no need to check JWT')
       return next()
+    }
     else {
       //if token exists, proceed, otherwise terminate
       if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
