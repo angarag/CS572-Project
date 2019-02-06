@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { StudentService } from "./student_service";
+
+
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -11,6 +13,12 @@ export class StudentComponent implements OnInit {
   private subscription: Subscription;
   token;
   questions;
+  text:string = "";
+    options:any = {maxLines: 1000, printMargin: false};
+    
+    onChange(code) {
+        console.log("new code", code);
+    }
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private service: StudentService) {

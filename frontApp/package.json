@@ -21,6 +21,7 @@
     "@angular/router": "~7.1.0",
     "bootstrap": "^3.4.0",
     "core-js": "^2.5.4",
+    "ng2-ace-editor": "^0.3.9",
     "rxjs": "~6.3.3",
     "simple-line-icons": "^2.4.1",
     "tslib": "^1.9.0",
