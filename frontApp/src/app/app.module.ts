@@ -38,7 +38,8 @@ import { DisplayQuestionComponent } from './question/display-question/display-qu
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StudentModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AuthService, AuthGuard],
   bootstrap: [AppComponent]
