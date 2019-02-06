@@ -11,6 +11,8 @@ const app = express();
 const port = process.env.port || 3600;
 
 var usersRouter = require('./routes/users');
+var questionsRouter = require('./routes/question');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -51,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Routes
 app.use("/admin", require('./routes/admin'));
 app.use('/api/users', usersRouter);
+app.use('/api/questions', questionsRouter);
 app.use('/api/students', require('./routes/student'));
 //TO DO
 // app.use("/staff", require('./routes/staff'));

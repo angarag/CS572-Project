@@ -1,30 +1,65 @@
-const express = require('express');
+var express = require('express');
+var router = express.Router();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const Question = require('../model/question');
 
-const QuestionService = require('../services/question');
-
-const questionRouter = express.Router();
-
-const questionService = new QuestionService();
-
-questionRouter.get('/', function (req, res, next) {
-  questionService.get({}).subscribe(
-    (questions) => res.status(200).json(questions),
-    (err) => next(err),
-    null
-  );
-
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
 });
 
-questionRouter.post('/', function (req, res, next) {
-  questionService.add(req.body)
-    .then(() => res.status(200).json({
-      success: true
-    }))
-    .catch((err) => next(err));
+router.post("/addquestion", function(req, res, next) {
+  const question = new Question({
+  category: req.body.category,
+  active: true,
+  question: req.body.question,
+  created_at: Date.now(),
+  updated_at: Date.now()
+  });
+
+  question
+    .save()
+    .then(result => {
+      res.status(201).json({
+        message: "Question created!",
+        result: result
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
-questionRouter.patch('/:id', (req, res, next) => {
 
+router.get("/displayquestion", function(req, res, next) {
+  Question.find({})
+    .then(result => {
+      return res.status(200).json({
+        data: result
+      });
+    })
+    .catch(error => {
+      return res.status(500).json({
+        error: error
+      });
+    });
 });
 
-module.exports = questionRouter; 
+router.post("/updatequestion", function(req, res, next) {
+  active = !req.body.active;
+  console.log(active);
+  Question.findOneAndUpdate(
+    {_id: req.body._id},
+    {$set: {'active': active}},
+    (err, result) => {
+      console.log(result.category);
+      return res.status(200).json({
+        data: result
+    })
+  });      
+});
+
+module.exports = router;
