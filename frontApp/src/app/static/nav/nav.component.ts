@@ -18,6 +18,27 @@ export class NavComponent implements OnInit {
     this.navbarOpen = !this.navbarOpen;
   }
 
+  isStudentPage() {
+    if (this.authService.isStudent()) {
+      return true;
+    }
+    return false;
+  }
+
+  isAdminPage() {
+    if (this.authService.isAdmin()) {
+      return true;
+    }
+    return false;
+  }
+
+  isStaffPage() {
+    if (this.authService.isStaff()) {
+      return true;
+    }
+    return false;
+  }
+
   ngOnInit() {
   }
 

@@ -40,6 +40,10 @@ export class AuthService {
     return localStorage.isAuthenticated ==='true';
   }
 
+  public isAdmin() {
+    return localStorage.role === "admin" ? true : false;
+  }
+
   public isStaff() {
     return localStorage.role === "staff" ? true : false;
   }
