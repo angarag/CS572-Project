@@ -6,7 +6,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { debounce } from "debounce";
 
 @Component({
-  
+
   selector: 'app-student',
   templateUrl: './student.component.html',
   styles: []
@@ -15,8 +15,13 @@ export class StudentComponent implements OnInit {
   private subscription: Subscription;
   token;
   questions;
-  text:string = "";
-    options:any = {maxLines: 1000, printMargin: false};
+  text: string = "";
+  options: any = { maxLines: 1000, printMargin: false };
+  private answers={
+    answer1:[],
+    answer2:[],
+    answer3:[]
+  }
   private answerForm: FormGroup;
 
   constructor(
@@ -58,15 +63,15 @@ export class StudentComponent implements OnInit {
       token: this.token,
       status: 'seen'
     }
-    if(this.token!=null)
-    this.service.updateToken(obj)
-      .subscribe((result) => {
-        console.log(result);
-      })
+    if (this.token != null)
+      this.service.updateToken(obj)
+        .subscribe((result) => {
+          console.log(result);
+        })
   }
-  onChange(code,id) {
-    console.log(id,"new snapshot:", code);
-}
+  onChange(code, id) {
+    console.log(id, "new snapshot:", code);
+  }
 
 
   onSubmit() {
