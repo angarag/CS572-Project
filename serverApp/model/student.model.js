@@ -6,16 +6,16 @@ const studentSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     entry:String,
     questions:[{
-        question:String,
-        answer:String,
+        accepted:Boolean,
         timespent:String,
         snapshots:[],
         timeoffbrowser:Number,
-        accepted:Boolean
+        question:String,
+        answer:String
     }],
     invitation:{
-        token: String,
         status:String,
+        token: String,
         valid:Boolean,
     },
     result: Boolean,
