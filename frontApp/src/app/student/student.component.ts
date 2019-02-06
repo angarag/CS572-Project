@@ -72,7 +72,7 @@ export class StudentComponent implements OnInit {
       const obj = {
         token: this.token,
         status: 'clicked',
-        date:null
+        date: null
       }
       if (this.token != null)
         this.service.updateToken(obj)
@@ -91,7 +91,7 @@ export class StudentComponent implements OnInit {
     const obj = {
       token: this.token,
       status: 'started',
-      date:(new Date(+new Date() + 2*60*60*1000))
+      date: (new Date(+new Date() + 2 * 60 * 60 * 1000))
     }
     if (this.token != null)
       this.service.updateToken(obj)
@@ -105,19 +105,19 @@ export class StudentComponent implements OnInit {
     console.log('submit answers clicked')
     console.log(this.answers)
     const obj = {
-      token:this.token,
+      token: this.token,
       q1a: this.answers[0],
       q2a: this.answers[1],
       q3a: this.answers[2],
-      q1:this.questions[0].question,
-      q2:this.questions[1].question,
-      q3:this.questions[2].question,
-      status:'answered'
+      q1: this.questions[0].question,
+      q2: this.questions[1].question,
+      q3: this.questions[2].question,
+      status: 'answered'
     }
     this.service.saveAnswers(obj)
-        .subscribe((result) => {
-          console.log(result);
-        })
-    
+      .subscribe((result) => {
+        console.log(result);
+      })
+
   }
 }
