@@ -13,14 +13,15 @@ import { debounce } from "debounce";
 })
 export class StudentComponent implements OnInit {
   private subscription: Subscription;
-  token;
+  token: string;
   questions;
   text: string = "";
+  is_started: Boolean = false;
   options: any = { maxLines: 1000, printMargin: false };
-  private answers={
-    answer1:[],
-    answer2:[],
-    answer3:[]
+  private answers = {
+    0: [],
+    1: [],
+    2: []
   }
   private answerForm: FormGroup;
 
@@ -44,9 +45,13 @@ export class StudentComponent implements OnInit {
             if (result['error'] || result['data'] == null)
               this.router.navigate(['/']);
             console.log('invitation token status below')
-            console.log(result['data'].invitation.status)
-            if (result['data'].invitation.status !== 'sent')
+            let status = result['data'].invitation.status;
+            console.log(status)
+            if (status.includes('answered'))
               this.router.navigate(['/']);
+            if (!status.includes('started'))
+              this.is_started = false;
+            else this.is_started = true;
           })
       })
   }
@@ -59,24 +64,41 @@ export class StudentComponent implements OnInit {
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    if (!this.is_started) {
+      const obj = {
+        token: this.token,
+        status: 'clicked',
+        date:null
+      }
+      if (this.token != null)
+        this.service.updateToken(obj)
+          .subscribe((result) => {
+            console.log(result);
+          })
+    }
+  }
+  onChange(code, id) {
+    this.answers[id].push(code);
+    console.log(id, "new snapshot:", code);
+  }
+
+  onStart() {
+    this.is_started = true;
     const obj = {
       token: this.token,
-      status: 'seen'
+      status: 'started',
+      date:(new Date(+new Date() + 2*60*60*1000))
     }
     if (this.token != null)
       this.service.updateToken(obj)
         .subscribe((result) => {
           console.log(result);
         })
-  }
-  onChange(code, id) {
-    console.log(id, "new snapshot:", code);
-  }
 
+  }
 
   onSubmit() {
-    const formValues = this.answerForm.value;
     console.log('submit answers clicked')
-    console.log(formValues)
+    console.log(this.answers)
   }
 }

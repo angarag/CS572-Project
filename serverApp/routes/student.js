@@ -125,14 +125,16 @@ router.get('/validateToken', (req, res) => {
 router.post('/updateToken', (req, res) => {
     const {
         token,
-        status
+        status,
+        date
     } = req.body;
     Student.findOneAndUpdate(
         { 'invitation.token': token },
         {
             $set:
             {
-                'invitation.status': status
+                'invitation.status': status,
+                'invitation.expireDate': date
             }
         })
         .then(result => {
@@ -208,7 +210,8 @@ function helper_createStudent(help_obj) {
         invitation: {
             token: hash,
             status: 'sent',
-            valid: true
+            valid: true,
+            expireDate: null
         }
     }
     const stu = new Student(studentObject);
