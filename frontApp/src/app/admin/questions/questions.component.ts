@@ -6,8 +6,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 declare let swal: any;
 
 @Component({
-  selector: 'question',
-  templateUrl: './questions.component.html',
+  selector: 'questions',
+  template: './questions.component.html',
   styleUrls: ['./questions.component.css']
 })
 export class QuestionComponent implements OnInit {

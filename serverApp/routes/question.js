@@ -1,30 +1,22 @@
 const express = require('express');
+const router = express.Router();
+const Question = require('../model/question');
 
-const QuestionService = require('../services/question');
+router.get("/", function (req, res, next) {
 
-const questionRouter = express.Router();
-
-const questionService = new QuestionService();
-
-questionRouter.get('/', function (req, res, next) {
-  questionService.get({}).subscribe(
-    (questions) => res.status(200).json(questions),
-    (err) => next(err),
-    null
-  );
-
-});
-
-questionRouter.post('/', function (req, res, next) {
-  questionService.add(req.body)
-    .then(() => res.status(200).json({
-      success: true
-    }))
-    .catch((err) => next(err));
-});
-
-questionRouter.patch('/:id', (req, res, next) => {
+Question.find({})
+        .then(result => {
+            return res.status(200).json({
+                data: result
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                error: error
+            });
+        });
 
 });
 
-module.exports = questionRouter; 
+
+module.exports = router;

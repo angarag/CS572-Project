@@ -53,12 +53,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 //Middleware
-app.use('/api', validateToken())
+//app.use('/api', validateToken())
 
 //Routes
 app.use("/admin", require('./routes/admin'));
 app.use('/api/users', usersRouter);
 app.use('/api/students', require('./routes/student'));
+app.use('/api/questions', require('./routes/question'));
 //TO DO
 // app.use("/staff", require('./routes/staff'));
 // app.use("/student", require('./routes/student'));
