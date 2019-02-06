@@ -5,7 +5,6 @@ const cors = require('cors');
 const path = require('path');
 const db = require('./db.js')
 const jwt = require('jsonwebtoken')
-const config = require('./keys')
 require('dotenv').config()
 
 const app = express();
@@ -23,16 +22,18 @@ const validateToken = (req, res, next) => {
     //if token exists, proceed, otherwise terminate
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
       let token = req.headers.authorization.split(' ')[1];
-      jwt.verify(token, config.pk, (err, decoded) => {
+      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
           console.log('invalid token')
           next(new Error("Invalid Token"));
         }
+        console.log('token'+JSON.stringify(decoded))
         req.body.jwt = decoded;
         next();
       })
     }
     else {
+      console.log('no token')
       next(new Error("No Token"));
     }
   }
