@@ -123,6 +123,8 @@ router.post("/login", function(req, res, next) {
         _token: token,
         _expiresIn: 7200,
         _role: fetchedUser.role,
+        _firstName: fetchedUser.firstName,
+        _lastName: fetchedUser.lastName,
         message: "Login Successfull."
       });
     })

@@ -17,6 +17,7 @@ const studentSchema = mongoose.Schema({
         status:String,
         token: String,
         valid:Boolean,
+        expireDate:Date
     },
     result: Boolean,
     published: Boolean

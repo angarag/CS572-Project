@@ -45,3 +45,12 @@ var token = jwt.sign(payload, process.env.JWT_SECRET, signOptions);
 var legit = jwt.verify(token, process.env.JWT_SECRET, signOptions);
 console.log("\nJWT verification result: " + JSON.stringify(legit));
 console.log("Token - " + token)
+
+
+var debounce = require('debounce');
+window.onresize = debounce(resize, 200);
+ 
+function resize(e) {
+  console.log('height', window.innerHeight);
+  console.log('width', window.innerWidth);
+}
