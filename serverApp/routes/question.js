@@ -84,7 +84,7 @@ router.post("/updatequestion", function(req, res, next) {
     })
   });      
 });
-router.get("/getRandomOnes", function (req, res, next) {
+router.get("/getRandomOnesWithoutToken", function (req, res, next) {
   Question.findRandom({active:true}, {}, {limit: 3}, function(err, results) {
     if (!err) {
       console.log(results); // 3 elements

@@ -23,7 +23,7 @@ export class StudentService {
         return this.http.get('http://localhost:3600/api' + "/students/invite/"+email);
     }
     public getRandomQuestions() {
-        return this.http.get('http://localhost:3600/api' + "/questions/getRandomOnes");
+        return this.http.get('http://localhost:3600/api' + "/questions/getRandomOnesWithoutToken");
     }
 
     public getStudents() {
