@@ -24,8 +24,9 @@ export class ReviewAnswerComponent implements OnInit {
       this.studentService.getStudentsbyId(this.id)
       .subscribe(res => {
         this.result = res['data'];
+        console.log(this.result.questions[0][0].answer);
       });
-      console.log(this.result.firstName);
+
     });
   }
 
