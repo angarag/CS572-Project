@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/student/student_service';
 import { AdminService } from '../admin.service';
-import { Server } from 'tls';
 
 @Component({
   selector: 'app-generate-result',

@@ -1,6 +1,70 @@
-<div class="list-group">
-    <a class="list-group-item list-group-item-action">{{result.firstName}}</a>
-    <a class="list-group-item list-group-item-action">{{result.email}}</a>
-    <a class="list-group-item list-group-item-action">{{result.entry}}</a>
-    <a class="list-group-item list-group-item-action disabled">{{result.date_of_birth}}</a>
-</div>
+    <div class="row">
+        <div class="col-md-2">
+            Name:
+        </div>
+        <div class="col-md-4">
+            {{result.firstName}} {{result.lastName}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            Email:
+        </div>
+        <div class="col-md-4">
+            {{result.email}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            Entry:
+        </div>
+        <div class="col-md-4">
+            {{result.entry}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            Result:
+        </div>
+        <div class="col-md-4">
+            <strong>{{result.published}} | uppercase </strong> 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            Invitation Status
+        </div>
+        <div class="col-md-4">
+            {{result.invitation.status}}
+        </div>
+    </div>
+
+    <hr>
+    <br>
+    <div class = "jumbotron">
+            <h5 class="display-4">QUESTION 1</h5>
+            <p class="display-4">{{result.questions[0][0].question}}</p>
+            <p class="display-4">{{result.questions[0][0].answer}}</p>
+        </div>
+    
+        <div class = "jumbotron">
+            <h5 class="display-4">QUESTION 2</h5>
+            <p class="display-4">{{result.questions[0][1].question}}</p>
+            <p class="display-4">{{result.questions[0][1].answer}}</p>
+        </div>
+
+        <div class = "jumbotron">
+             <h5 class="display-4">QUESTION 3</h5>
+            <p class="display-4">{{result.questions[0][2].question}}</p>
+            <p class="display-4">{{result.questions[0][2].answer}}</p>
+    </div>    
+
+
+
+
+
+
