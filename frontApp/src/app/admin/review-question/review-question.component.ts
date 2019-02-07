@@ -10,8 +10,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ReviewQuestionComponent implements OnInit {
 
-  id: number;
-  result;
+  results;
 
   constructor
   (private adminService: AdminService,
@@ -19,14 +18,9 @@ export class ReviewQuestionComponent implements OnInit {
    private route: ActivatedRoute ) { }
 
   ngOnInit() {
-    this.route.params
-    .subscribe((params: Params) => {
-      this.id = params['id'];
-      this.studentService.getStudentsbyId(this.id)
-      .subscribe(res => {
-        this.result = res['data'];
-      });
-
+    this.studentService.getStudents()
+    .subscribe(res => {
+      this.results = res['data'];
     });
   }
 
