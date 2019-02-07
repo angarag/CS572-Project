@@ -18,6 +18,7 @@ export class StudentComponent implements OnInit {
   questions;
   text: string = "";
   is_started: Boolean = false;
+  status:string="";
   private firstName: string;
   private lastName:string;
   options: any = { maxLines: 1000, printMargin: false };
@@ -50,11 +51,12 @@ export class StudentComponent implements OnInit {
             if (result['error'] || result['data'] == null)
               this.router.navigate(['/']);
             console.log('invitation token status below')
-            let status = result['data'].invitation.status;
+            this.status = result['data'].invitation.status;
             console.log(status)
-            if (status.includes('answered'))
+            if (this.status.includes('answered')){
               this.router.navigate(['/']);
-            if (!status.includes('started'))
+            }
+            if (!this.status.includes('started'))
               this.is_started = false;
             else this.is_started = true;
           })
@@ -77,7 +79,7 @@ export class StudentComponent implements OnInit {
         status: 'clicked',
         date: null
       }
-      if (this.token != null)
+      if (this.token != null && this.status==='sent')
         this.service.updateToken(obj)
           .subscribe((result) => {
             console.log(result);
