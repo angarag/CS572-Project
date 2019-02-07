@@ -1,4 +1,7 @@
 .jumbotron {
-width: 700px;
+width: 750px;
+}
 
+.rightp {
+    float: right;
 }

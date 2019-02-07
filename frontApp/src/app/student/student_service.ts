@@ -33,4 +33,8 @@ export class StudentService {
     public getStudentsbyId(id) {
         return this.http.get('http://localhost:3600/api' + "/students/getAll/"+id);
     }
+
+    public updateStudent(result){
+        return this.http.post('http://localhost:3600/api' + "/students/updatestudent", result);
+    }
 }
