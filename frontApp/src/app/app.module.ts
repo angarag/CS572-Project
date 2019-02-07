@@ -26,6 +26,7 @@ import { StudentService } from './student/student_service';
 import { ResultItemComponent } from './admin/result-item/result-item.component';
 import { AdminService } from './admin/admin.service';
 import { ResultStartComponent } from './admin/result-start/result-start.component';
+import { ReviewQuestionComponent } from './admin/review-question/review-question.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ResultStartComponent } from './admin/result-start/result-start.componen
     ReviewAnswerComponent,
     GenerateResultComponent,
     ResultItemComponent,
-    ResultStartComponent
+    ResultStartComponent,
+    ReviewQuestionComponent
   ],
   imports: [
     BrowserModule,

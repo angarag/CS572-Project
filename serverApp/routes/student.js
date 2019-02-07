@@ -44,6 +44,19 @@ router.get("/getAll/:id", function (req, res, next) {
 
 });
 
+router.post("/updatestudent", function(req, res, next) {
+    
+    Student.findOneAndUpdate(
+      {_id: req.body._id},
+      {$set: {'result': req.body.result}},
+      (err, result) => {
+        console.log(result.category);
+        return res.status(200).json({
+          data: result
+      })
+    });      
+  });
+
 router.post('/upsert', (req, res) => {
     const {
         firstName,

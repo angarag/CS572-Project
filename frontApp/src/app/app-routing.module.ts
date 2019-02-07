@@ -10,6 +10,7 @@ import { DisplayQuestionComponent } from './question/display-question/display-qu
 import { GenerateResultComponent } from './admin/generate-result/generate-result.component';
 import { ReviewAnswerComponent } from './admin/review-answer/review-answer.component';
 import { ResultStartComponent } from './admin/result-start/result-start.component';
+import { ReviewQuestionComponent } from './admin/review-question/review-question.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'displaystaff', component: DisplayStaffComponent, canActivate: [AuthGuard] },
   { path: 'addquestion', component: AddQuestionComponent },
   { path: 'displayquestion', component: DisplayQuestionComponent },
+  { path: 'publishresult', component: ReviewQuestionComponent },
   {path:'generateresult', component:GenerateResultComponent, children: [
     {path: '', component: ResultStartComponent},
     {path: ':id', component: ReviewAnswerComponent}

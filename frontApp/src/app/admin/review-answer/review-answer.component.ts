@@ -11,6 +11,7 @@ import { StudentService } from 'src/app/student/student_service';
 export class ReviewAnswerComponent implements OnInit {
   id: number;
   result;
+  resultStatus;
 
   constructor
   (private adminService: AdminService,
@@ -26,7 +27,22 @@ export class ReviewAnswerComponent implements OnInit {
         this.result = res['data'];
         console.log(this.result.questions[0][0].answer);
       });
+    });
+  }
 
+  onPass() {
+    this.result.result = true;
+    this.studentService.updateStudent(this.result)
+    .subscribe((res) => {
+      this.result = res['data'];
+    });
+  }
+
+  onFail() {
+    this.result.result = false;
+    this.studentService.updateStudent(this.result)
+    .subscribe((res) => {
+      this.result = res['data'];
     });
   }
 
