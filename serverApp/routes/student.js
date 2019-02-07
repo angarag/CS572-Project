@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Student = require('../model/student.model');
 const nodemailer = require('nodemailer')
+require('dotenv').config()
 const email = {
-    username: 'mwa.mum.2019@gmail.com',
-    password: 'rootroot'
+    username: process.env.MAIL_USER_EMAIL,
+    password: process.env.MAIL_USER_PASSWORD
 }
 const bcrypt = require('bcrypt');
 const saltRounds = 7;
