@@ -10,6 +10,12 @@
             </button>
           </div>
           <div class="col-md-12 mx-auto" *ngIf="is_started">
+              <div>
+                  <label for="uname1">Enter your first name</label>
+                  <input [value]="firstName" (input)="firstName=$event.target.value" >
+                  <label for="uname2">Enter your last name</label>
+                  <input [value]="lastName" (input)="lastName=$event.target.value" >
+                </div>  
             <!-- form card login -->
             <div class="card rounded-0">
               <div class="card-header">

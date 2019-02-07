@@ -173,7 +173,9 @@ router.post('/saveQuestionAnswersWithInvitationToken', (req, res) => {
         status,
         q1,
         q2,
-        q3
+        q3,
+        firstName,
+        lastName
     } = req.body;
     console.log(q1a,q2a,q3a)
     Student.findOneAndUpdate(
@@ -191,6 +193,8 @@ router.post('/saveQuestionAnswersWithInvitationToken', (req, res) => {
                 'questions.0.answer':q1a[q1a.length-1],
                 'questions.1.answer':q2a[q2a.length-1],
                 'questions.2.answer':q3a[q3a.length-1],
+                'firstName':firstName,
+                'lastName':lastName
             }
         })
         .then(result => {

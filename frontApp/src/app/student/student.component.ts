@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { StudentService } from "./student_service";
+import { AuthService } from "./../auth/auth_services/auth.service";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { debounce } from "debounce";
 
@@ -17,6 +18,8 @@ export class StudentComponent implements OnInit {
   questions;
   text: string = "";
   is_started: Boolean = false;
+  private firstName: string;
+  private lastName:string;
   options: any = { maxLines: 1000, printMargin: false };
   private answers = {
     0: [],
@@ -29,9 +32,11 @@ export class StudentComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private service: StudentService
+    private service: StudentService,
+    private authService: AuthService
   ) {
-    localStorage.removeItem("token");
+    this.authService.logoutHelper();
+    
     this.answerForm = this.formBuilder.group({
       answer1: ['', [Validators.required]],
       answer2: ['', [Validators.required]],
@@ -61,6 +66,8 @@ export class StudentComponent implements OnInit {
       .subscribe(res => {
         this.questions = res['data'];
       })
+      this.firstName="";
+      this.lastName="";
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -108,11 +115,14 @@ export class StudentComponent implements OnInit {
       q1: this.questions[0].question,
       q2: this.questions[1].question,
       q3: this.questions[2].question,
-      status: 'answered'
+      status: 'answered',
+      firstName:this.firstName,
+      lastName:this.lastName
     }
     this.service.saveAnswers(obj)
       .subscribe((result) => {
-        console.log(result);
+        alert('Test is submitted')
+        this.router.navigate(['/']);
       })
 
   }

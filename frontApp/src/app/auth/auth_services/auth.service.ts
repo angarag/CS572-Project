@@ -53,11 +53,15 @@ export class AuthService {
   }
 
   public logout() {
+    this.logoutHelper();
+    this.router.navigate(["/login"]);
+  }
+
+  public logoutHelper(){
     this.jwtToken = null;
     this.isAuthenticated = false;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(["/login"]);
   }
 
     public loginSuccess(response) {

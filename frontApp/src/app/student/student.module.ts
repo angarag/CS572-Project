@@ -6,7 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import {StudentService} from './student_service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AceEditorModule } from 'ng2-ace-editor';
-
+import { AuthService } from "./../auth/auth_services/auth.service";
 @NgModule({
   declarations: [StudentComponent, SignupComponent],
   imports: [
@@ -20,7 +20,7 @@ import { AceEditorModule } from 'ng2-ace-editor';
     ])
 
   ],
-  providers:[],
+  providers:[AuthService,StudentService],
   bootstrap:[StudentComponent]
 })
 export class StudentModule { }
