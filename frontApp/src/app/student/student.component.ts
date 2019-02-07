@@ -21,6 +21,9 @@ export class StudentComponent implements OnInit {
   status:string="";
   private firstName: string;
   private lastName:string;
+  max_timer: number = 3600*2;
+  timeLeft: number = this.max_timer;
+  interval;
   options: any = { maxLines: 1000, printMargin: false };
   private answers = {
     0: [],
@@ -52,7 +55,11 @@ export class StudentComponent implements OnInit {
               this.router.navigate(['/']);
             console.log('invitation token status below')
             this.status = result['data'].invitation.status;
-            console.log(status)
+            if(result['data'].invitation.expireDate!=null){
+              let d = new Date(result['data'].invitation.expireDate);
+              let s = d.getTime()/1000- Date.now()
+              console.log(result['data'].invitation.expireDate,'seconds left:',s)  
+            }
             if (this.status.includes('answered')){
               this.router.navigate(['/']);
             }
@@ -72,6 +79,7 @@ export class StudentComponent implements OnInit {
       this.lastName="";
   }
   ngOnDestroy() {
+    this.pauseTimer();
     this.subscription.unsubscribe();
     if (!this.is_started) {
       const obj = {
@@ -92,11 +100,12 @@ export class StudentComponent implements OnInit {
   }
 
   onStart() {
+    this.startTimer();
     this.is_started = true;
     const obj = {
       token: this.token,
       status: 'started',
-      date: (new Date(+new Date() + 2 * 60 * 60 * 1000))
+      date: (new Date(+new Date() + this.max_timer))
     }
     if (this.token != null)
       this.service.updateToken(obj)
@@ -107,6 +116,7 @@ export class StudentComponent implements OnInit {
   }
 
   onSubmit() {
+    this.pauseTimer();
     console.log('submit answers clicked')
     console.log(this.answers)
     const obj = {
@@ -127,5 +137,21 @@ export class StudentComponent implements OnInit {
         this.router.navigate(['/']);
       })
 
+  }
+
+
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = this.max_timer;
+      }
+    },1000)
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
   }
 }

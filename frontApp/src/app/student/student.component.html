@@ -10,6 +10,7 @@
             </button>
           </div>
           <div class="col-md-12 mx-auto" *ngIf="is_started">
+              <p>{{timeLeft}} seconds Left....</p> 
               <div>
                   <label for="uname1">Enter your first name</label>
                   <input [value]="firstName" (input)="firstName=$event.target.value" >
