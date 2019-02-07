@@ -84,7 +84,24 @@ router.post("/users", function(req, res, next) {
   });      
 });
 
+router.get("/getRoleByToken", function(req, res, next) {
+  console.log(req.query.token)
+  console.log('token is above')
+  if(req.query.token==null){
+    return res.status(401).json({
+    error:'no token passed'
+    })  
+  }
+  else{
+    var legit = jwt.verify(req.query.token, process.env.JWT_SECRET, { expiresIn: "2h" });
+    console.log('decoded token:'+legit.role)
+    return res.status(200).json({
+      data:legit.role
+    })
+  
+  }
 
+})
 // user login
 router.post("/login", function(req, res, next) {
   let fetchedUser;
@@ -99,7 +116,7 @@ router.post("/login", function(req, res, next) {
         });
       }
       fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password);
+//      return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
       console.log(result);

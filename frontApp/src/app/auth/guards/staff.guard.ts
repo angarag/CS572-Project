@@ -12,11 +12,14 @@ export class StaffGuard implements CanActivate {
     canActivate(
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        const isAuthenticated = this.authService.isLoggedIn();
-        console.log(isAuthenticated)
-        if (!isAuthenticated) {
-          this.router.navigate(['/login']);
-        }
-        return isAuthenticated;
+        if(this.authService.getToken()==null)
+        return false;
+        this.authService.checkRole().subscribe(data=>{
+          console.log(data['data'])
+            if(data['data']==='staff')
+            return true;
+            else this.router.navigate(['/login']);
+        });
+        return true;
       }
 }
