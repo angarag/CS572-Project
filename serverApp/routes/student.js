@@ -238,9 +238,9 @@ function sendInvitations(to_whom, res) {
             from: email.username,
             to: to_whom,
             subject: 'Welcome to University A',
-            html: `<h1>That was easy!</h1>
+            html: `<h1>You are invited to take the pretest exam!</h1>
         <a href="http://localhost:4200/student/token?token=${hash}">
-        Click me to take exam
+        Click me to start it
         </a>
         `
         };
