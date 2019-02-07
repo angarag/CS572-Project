@@ -25,6 +25,7 @@ export class ReviewAnswerComponent implements OnInit {
       this.studentService.getStudentsbyId(this.id)
       .subscribe(res => {
         this.result = res['data'];
+        this.result.result = false;
         console.log(this.result.questions[0][0].answer);
       });
     });
@@ -34,7 +35,7 @@ export class ReviewAnswerComponent implements OnInit {
     this.result.result = true;
     this.studentService.updateStudent(this.result)
     .subscribe((res) => {
-      this.result = res['data'];
+      //this.result = res['data'];
     });
   }
 
@@ -42,7 +43,7 @@ export class ReviewAnswerComponent implements OnInit {
     this.result.result = false;
     this.studentService.updateStudent(this.result)
     .subscribe((res) => {
-      this.result = res['data'];
+      //this.result = res['data'];
     });
   }
 
