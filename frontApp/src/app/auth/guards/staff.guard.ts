@@ -7,11 +7,16 @@ import { AuthService } from '../auth_services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentGuard implements CanActivate {
+export class StaffGuard implements CanActivate {
     constructor(private authService: AuthService, private router: Router) {}
     canActivate(
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-          return true;
+        const isAuthenticated = this.authService.isLoggedIn();
+        console.log(isAuthenticated)
+        if (!isAuthenticated) {
+          this.router.navigate(['/login']);
+        }
+        return isAuthenticated;
       }
 }
