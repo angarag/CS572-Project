@@ -248,6 +248,7 @@ function sendInvitations(to_whom, res) {
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log('error occured when sending email')
+                console.log(email)
                 console.log(error);
                 return res.status(200).json({
                     data: false
