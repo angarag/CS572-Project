@@ -271,7 +271,9 @@ function helper_createStudent(help_obj) {
             status: 'sent',
             valid: true,
             expireDate: null
-        }
+        },
+        result:false,
+        published:false
     }
     const stu = new Student(studentObject);
     stu.save()
