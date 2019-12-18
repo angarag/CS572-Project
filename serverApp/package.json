@@ -19,7 +19,7 @@
     "jsonwebtoken": "^8.4.0",
     "less-middleware": "^3.1.0",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.4.8",
+    "mongoose": "^5.7.5",
     "mongoose-simple-random": "^0.4.1",
     "morgan": "~1.9.0",
     "nodemailer": "^5.1.1"
